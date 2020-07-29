@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PaintableObject
-  - PaintedObject
+  - RedPaintedObject
+  - BluePaintedObject
+  - Unpaintable
   layers:
   - Default
   - TransparentFX
