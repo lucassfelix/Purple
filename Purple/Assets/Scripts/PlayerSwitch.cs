@@ -5,9 +5,9 @@ public class PlayerSwitch : MonoBehaviour
 {
     public static event Action<Rigidbody> OnPlayerSwitched;
 
-    private bool _redIsCurrentPlayer = true;
-    private Rigidbody _redPlayer;
-    private Rigidbody _bluePlayer;
+    private static bool _redIsCurrentPlayer = true;
+    private static Rigidbody _redPlayer;
+    private static Rigidbody _bluePlayer;
 
     private void Awake() {
         _redPlayer = GameObject.Find("RedPlayer").GetComponent<Rigidbody>();
@@ -19,9 +19,9 @@ public class PlayerSwitch : MonoBehaviour
         OnPlayerSwitched?.Invoke(_redPlayer);
     }
 
-    private void SwitchPlayers()
+    public static void SwitchPlayers()
     {
-        OnPlayerSwitched?.Invoke(_redIsCurrentPlayer ? _redPlayer : _bluePlayer);
+        OnPlayerSwitched?.Invoke(_redIsCurrentPlayer ? _bluePlayer : _redPlayer);
 
         _redIsCurrentPlayer = !_redIsCurrentPlayer;
     }

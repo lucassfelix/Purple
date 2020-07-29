@@ -7,21 +7,20 @@ public class CameraFollow : MonoBehaviour
     
     private Rigidbody _playerRigidbody;
 
-    void Awake()
+    private void Awake()
     {
         PlayerSwitch.OnPlayerSwitched += CameraSwitch;
     }
-
-    void Update()
+ 
+    private void Update()
     {
-        transform.position = new Vector3(_playerRigidbody.transform.position.x,10,_playerRigidbody.transform.position.z);
+        var playerPosition = _playerRigidbody.transform.position;
+        transform.position = new Vector3(playerPosition.x,10,playerPosition.z);
     }
 
-    void CameraSwitch(Rigidbody _newPlayerRb)
+    private void CameraSwitch(Rigidbody newPlayerRb)
     {
-        _playerRigidbody = _newPlayerRb;
+        _playerRigidbody = newPlayerRb;
     }
-
-
 
 }

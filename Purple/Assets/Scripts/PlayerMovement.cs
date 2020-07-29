@@ -4,35 +4,35 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _moveSpeed = 6f;
+    private const float MOVE_SPEED = 6f;
     private Vector3 _moveDirection;
 
     private Rigidbody _currentRigidbody;
 
     private bool ShouldMove => _moveDirection != Vector3.zero;
 
-    void Awake()
+    private void Awake()
     {
         PlayerSwitch.OnPlayerSwitched += SwitchPlayers;
     }
 
 
-    void Update()
+    private void Update()
     {
         _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
     }
 
 
-    void SwitchPlayers(Rigidbody _newCurrentRb)
+    void SwitchPlayers(Rigidbody newCurrentRb)
     {
-            _currentRigidbody = _newCurrentRb;
+            _currentRigidbody = newCurrentRb;
     }
 
     void FixedUpdate() 
     {
         if(ShouldMove)
         {
-            _currentRigidbody.velocity = _moveDirection * _moveSpeed;
+            _currentRigidbody.velocity = _moveDirection * MOVE_SPEED;
         }    
     }
 }
