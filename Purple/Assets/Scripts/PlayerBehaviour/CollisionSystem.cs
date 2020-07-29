@@ -6,9 +6,8 @@ using UnityEngine.Serialization;
 
 public class CollisionSystem : MonoBehaviour
 {
-    [SerializeField] private string _paintedObjectTag;
+    [SerializeField] private string _paintedObjectTag = "Placeholder";
 
-    
     private Material _playerMaterial;
     private ParticleSystem _playerParticleSystem;
 

@@ -28,6 +28,11 @@ public class FieldOfView : MonoBehaviour
         DrawFieldOfView();
     }
 
+    public void SetVisibility(bool value)
+    {
+        viewMeshFilter.gameObject.SetActive(value);
+    }
+
     void DrawFieldOfView()
     {
         int stepCount = Mathf.RoundToInt(_viewAngle * _meshResolution);

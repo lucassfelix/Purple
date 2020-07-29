@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const float MOVE_SPEED = 6f;
+    [SerializeField]private float _moveSpeed = 7f;
+    private Vector3 _initialTouchPosition;
     private Vector3 _moveDirection;
+    private Camera _camera;
+
+    public Joystick joystick;
 
     private Rigidbody _currentRigidbody;
 
@@ -13,26 +18,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        PlayerSwitch.OnPlayerSwitched += SwitchPlayers;
+        PlayerSwitch.OnPlayerSwitched += SwitchPlayersMovement;
+        _camera = Camera.main;
     }
-
 
     private void Update()
     {
-        _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        _moveDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical).normalized;
     }
 
 
-    void SwitchPlayers(Rigidbody newCurrentRb)
+    void SwitchPlayersMovement(Rigidbody newCurrentRb)
     {
-            _currentRigidbody = newCurrentRb;
+        _initialTouchPosition = Vector3.zero;
+        _currentRigidbody = newCurrentRb;
     }
 
     void FixedUpdate() 
     {
         if(ShouldMove)
         {
-            _currentRigidbody.velocity = _moveDirection * MOVE_SPEED;
+            _currentRigidbody.velocity = _moveDirection * _moveSpeed;
         }    
     }
 }
