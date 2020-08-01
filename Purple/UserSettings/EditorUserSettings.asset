@@ -11,6 +11,9 @@ EditorUserSettings:
     UnityRemoteDevice:
       value: 530104565d055b0b405e5c7248770645374439080d78766208
       flags: 0
+    lightmappingDeviceAndPlatform:
+      value: 53
+      flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
