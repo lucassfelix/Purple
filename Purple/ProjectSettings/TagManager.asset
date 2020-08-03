@@ -8,6 +8,7 @@ TagManager:
   - RedPaintedObject
   - BluePaintedObject
   - Unpaintable
+  - Purple
   layers:
   - Default
   - TransparentFX

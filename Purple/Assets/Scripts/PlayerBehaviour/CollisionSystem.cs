@@ -7,13 +7,14 @@ using UnityEngine.Serialization;
 public class CollisionSystem : MonoBehaviour
 {
     [SerializeField] private string _paintedObjectTag = "Placeholder";
-
-    private Material _playerMaterial;
+    [SerializeField] private Material _purpleVisible;
+    
+    private MeshRenderer _playerMeshRenderer;
     private ParticleSystem _playerParticleSystem;
 
     private void Start()
     {
-        _playerMaterial = GetComponent<MeshRenderer>().material;
+        _playerMeshRenderer = GetComponent<MeshRenderer>();
         _playerParticleSystem = GetComponent<ParticleSystem>();
     }
 
@@ -21,12 +22,16 @@ public class CollisionSystem : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            
+            _playerMeshRenderer.material = _purpleVisible;
+            gameObject.GetComponent<TrailRenderer>().material = _purpleVisible;
+            gameObject.GetComponent<ParticleSystemRenderer>().material = _purpleVisible;
+            _paintedObjectTag = "Purple";
+            PlayerSwitch.WinLevel();
         }
         else if (!other.gameObject.CompareTag("Unpaintable") && !other.gameObject.CompareTag(_paintedObjectTag))
         {
             _playerParticleSystem.Play();
-            other.gameObject.GetComponent<MeshRenderer>().material = _playerMaterial;
+            other.gameObject.GetComponent<MeshRenderer>().material = _playerMeshRenderer.material;
             other.gameObject.tag = _paintedObjectTag;
         }
         
